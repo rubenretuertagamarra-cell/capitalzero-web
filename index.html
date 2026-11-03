@@ -26,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+[hidden]:not([hidden="until-found" i]) { display: none !important; }
 /* Concepto: una sola escena 3D fija detrás de la página. Mil puntos de luz forman el "Zero" y se recomponen en
    cada sección (ruta, mercado, terreno, planes). El texto flota encima en paneles de vidrio. Look único, nocturno. */
 :root {
@@ -509,7 +510,7 @@ body:has(.legal[open]) { overflow: hidden; }
 .cz-send.stop svg { fill: currentColor; }
 .cz-foot { font-size: 0.76rem; color: var(--mute); padding: 0 0.9rem 0.8rem; }
 @media (max-width: 760px) {
-  .cz-chat { right: 0; left: 0; bottom: 0; width: auto; height: 82vh; max-height: none; border-radius: 22px 22px 0 0; }
+  .cz-chat { right: 8px; left: 8px; bottom: calc(78px + env(safe-area-inset-bottom, 0px)); width: auto; height: min(74vh, calc(100vh - 110px)); max-height: none; border-radius: 22px; }
   .cz-chat-btn { padding: 0; width: 52px; height: 52px; justify-content: center; font-size: 0; gap: 0; right: max(14px, env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
   .cz-chat-btn svg { width: 24px; height: 24px; }
 }
@@ -1717,7 +1718,7 @@ body:has(.legal[open]) { overflow: hidden; }
     msgs.appendChild(wrap); msgs.scrollTop = msgs.scrollHeight;
   }
   function open() {
-    panel.hidden = false; btn.setAttribute("aria-expanded", "true");
+    panel.hidden = false; btn.setAttribute("aria-expanded", "true"); btn.setAttribute("aria-label", "Cerrar el asistente de CapitalZero");
     if (!started) {
       started = true;
       add("bot", "Hola, soy el asistente de **CapitalZero**. Te ayudo con dudas sobre los planes, el simulador, los desafíos o cómo empezar. ¿Qué quieres saber?");
@@ -1725,7 +1726,7 @@ body:has(.legal[open]) { overflow: hidden; }
     }
     setTimeout(function () { input.focus(); }, 50);
   }
-  function close() { panel.hidden = true; btn.setAttribute("aria-expanded", "false"); btn.focus(); }
+  function close() { panel.hidden = true; btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-label", "Abrir el asistente de CapitalZero"); btn.focus(); }
   btn.onclick = function () { panel.hidden ? open() : close(); };
   document.getElementById("czClose").onclick = close;
   document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && !panel.hidden) close(); });
