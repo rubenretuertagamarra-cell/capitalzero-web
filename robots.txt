@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thunderous-zuccutto-7b1209.netlify.app/sitemap.xml
+Sitemap: https://capital-zero.netlify.app/sitemap.xml
